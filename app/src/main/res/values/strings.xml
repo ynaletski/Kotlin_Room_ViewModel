@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MyStartKotlin</string>
+    <string name="defaultNumber">1</string>
+    <string name="defaultTextDescription"> Для добавления события нажмите кнопку Добавить событие.
+                                        Подтвердите создание либо отмените, нажав на
+                                        соответствующие кнопки. Для редактирования и удаления
+                                        события, так же необходимо нажать на соответствующие кнопки. </string>
+    <string name="defaultDateTime">20.20.2020 02:02</string>
+    <string name="errorNumbScale">Введите: 1–1000</string>
+    <string name="errorNumbNull">Введите значение</string>
+    <string name="errorDescriptionNull">Введите описание</string>
+
+</resources>
