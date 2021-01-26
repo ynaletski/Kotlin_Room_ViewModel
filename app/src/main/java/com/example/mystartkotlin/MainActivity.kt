@@ -3,10 +3,13 @@ package com.example.mystartkotlin
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         EventViewModelFactory((application as EventsApplication).repository)
     }
 
+    private lateinit var deleteAll: FloatingActionButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var eventAdapter: EventAdapter
 
@@ -48,6 +52,24 @@ class MainActivity : AppCompatActivity() {
                         resources.getString(R.string.defaultTextDescription),
                         resources.getString(R.string.defaultDateTime)))
             }
+        }
+
+        deleteAll = findViewById(R.id.deleteAll)
+        deleteAll.setOnClickListener{
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle(R.string.dialogTitle)
+            builder.setMessage(R.string.dialogMessage)
+            builder.setIcon(android.R.drawable.ic_dialog_alert)
+            builder.setPositiveButton("Yes"){ _, _ ->
+                Toast.makeText(applicationContext,"удаление", Toast.LENGTH_LONG).show()
+                eventViewModel.deleteAll()
+            }
+            builder.setNeutralButton("Cancel"){ _, _ ->
+                Toast.makeText(applicationContext,"действие отменено",Toast.LENGTH_LONG).show()
+            }
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.setCancelable(false)
+            alertDialog.show()
         }
     }
 

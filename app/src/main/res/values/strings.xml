@@ -10,4 +10,7 @@
     <string name="errorNumbNull">Введите значение</string>
     <string name="errorDescriptionNull">Введите описание</string>
 
+    <string name="dialogTitle">Удалить Все</string>
+    <string name="dialogMessage">Вы уверены что хотите удалить все записи?</string>
+
 </resources>
