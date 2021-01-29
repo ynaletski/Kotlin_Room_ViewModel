@@ -30,7 +30,6 @@ internal class EventAdapter(
         holder.description.text = event.description
         holder.textTimeDate.text = event.dateTime
         holder.deleteEvent.setOnClickListener {
-            //removeEventClickListener.removeEvent(position)
             event.id?.let { it1 -> removeEventClickListener.removeEvent(it1) }
             notifyItemRangeChanged(position, itemCount)
         }

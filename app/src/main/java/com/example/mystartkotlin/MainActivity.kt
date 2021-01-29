@@ -26,15 +26,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        recyclerView = findViewById(R.id.eventList)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        //если знаем за ранее размер списка то true
-        recyclerView.setHasFixedSize(false)
+        initialize()
+
         eventAdapter = EventAdapter(this, object : RemoveClickListener {
 
             override fun removeEvent(positionEvent: Int) {
                 eventViewModel.deleteByEventId(positionEvent)
-                //eventViewModel.deleteAll()
             }
         })
 
@@ -45,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         eventViewModel.countEvents.observe(this) { count ->
-            //println(count)
             if (count == 0) {
                 eventViewModel.insert(Event(null,
                         resources.getString(R.string.defaultNumber),
@@ -54,19 +50,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        deleteAll = findViewById(R.id.deleteAll)
-        deleteAll.setOnClickListener{
+        deleteAll.setOnClickListener {
             val builder = AlertDialog.Builder(this)
-            builder.setTitle(R.string.dialogTitle)
-            builder.setMessage(R.string.dialogMessage)
-            builder.setIcon(android.R.drawable.ic_dialog_alert)
-            builder.setPositiveButton("Yes"){ _, _ ->
-                Toast.makeText(applicationContext,"удаление", Toast.LENGTH_LONG).show()
-                eventViewModel.deleteAll()
-            }
-            builder.setNeutralButton("Cancel"){ _, _ ->
-                Toast.makeText(applicationContext,"действие отменено",Toast.LENGTH_LONG).show()
-            }
+                    .setTitle(R.string.dialogTitle)
+                    .setMessage(R.string.dialogMessage)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton("Yes") { _, _ ->
+                        Toast.makeText(applicationContext, "удаление", Toast.LENGTH_LONG).show()
+                        eventViewModel.deleteAll()
+                    }
+                    .setNeutralButton("Cancel") { _, _ ->
+                        Toast.makeText(applicationContext, "действие отменено", Toast.LENGTH_LONG).show()
+                    }
             val alertDialog: AlertDialog = builder.create()
             alertDialog.setCancelable(false)
             alertDialog.show()
@@ -85,5 +80,13 @@ class MainActivity : AppCompatActivity() {
         if (resultCode == RESULT_OK) {
             //eventAdapter.insertData(Cash.getEvents())
         }
+    }
+
+    private fun initialize() {
+        recyclerView = findViewById(R.id.eventList)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        //если знаем за ранее размер списка то true
+        recyclerView.setHasFixedSize(false)
+        deleteAll = findViewById(R.id.deleteAll)
     }
 }
