@@ -51,21 +51,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         deleteAll.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-                    .setTitle(R.string.dialogTitle)
-                    .setMessage(R.string.dialogMessage)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setPositiveButton("Yes") { _, _ ->
-                        Toast.makeText(applicationContext, "удаление", Toast.LENGTH_LONG).show()
-                        eventViewModel.deleteAll()
-                    }
-                    .setNeutralButton("Cancel") { _, _ ->
-                        Toast.makeText(applicationContext, "действие отменено", Toast.LENGTH_LONG).show()
-                    }
-            val alertDialog: AlertDialog = builder.create()
+
+            val alertDialog: AlertDialog.Builder = AlertDialog.Builder(this).apply {
+                this.setTitle(R.string.dialogTitle)
+                        .setMessage(R.string.dialogMessage)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton("Yes") { _, _ ->
+                            Toast.makeText(applicationContext, "удаление", Toast.LENGTH_LONG).show()
+                            eventViewModel.deleteAll()
+                        }
+                        .setNeutralButton("Cancel") { _, _ ->
+                            Toast.makeText(applicationContext, "действие отменено", Toast.LENGTH_LONG).show()
+                        }.create()
+            }
+
             alertDialog.setCancelable(false)
             alertDialog.show()
         }
+
     }
 
     // Метод обработки нажатия на кнопку
@@ -89,4 +92,5 @@ class MainActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(false)
         deleteAll = findViewById(R.id.deleteAll)
     }
+
 }
