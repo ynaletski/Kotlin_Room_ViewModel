@@ -1,6 +1,8 @@
-package com.example.mystartkotlin
+package com.example.mystartkotlin.dependency
 
 import android.app.Application
+import com.example.mystartkotlin.repository.EventRepository
+import com.example.mystartkotlin.datasource.room.EventRoomDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 

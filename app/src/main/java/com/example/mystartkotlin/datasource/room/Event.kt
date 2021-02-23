@@ -1,4 +1,4 @@
-package com.example.mystartkotlin
+package com.example.mystartkotlin.datasource.room
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

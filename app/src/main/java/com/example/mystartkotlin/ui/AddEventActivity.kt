@@ -1,4 +1,4 @@
-package com.example.mystartkotlin
+package com.example.mystartkotlin.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,6 +8,11 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mystartkotlin.EventViewModel
+import com.example.mystartkotlin.EventViewModelFactory
+import com.example.mystartkotlin.dependency.EventsApplication
+import com.example.mystartkotlin.R
+import com.example.mystartkotlin.datasource.room.Event
 import java.text.SimpleDateFormat
 import java.util.*
 

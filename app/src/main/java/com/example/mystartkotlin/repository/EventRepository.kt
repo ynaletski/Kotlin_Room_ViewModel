@@ -1,6 +1,8 @@
-package com.example.mystartkotlin
+package com.example.mystartkotlin.repository
 
 import androidx.annotation.WorkerThread
+import com.example.mystartkotlin.datasource.room.Event
+import com.example.mystartkotlin.datasource.room.EventDao
 import kotlinx.coroutines.flow.Flow
 
 class EventRepository(private val eventDao: EventDao) {

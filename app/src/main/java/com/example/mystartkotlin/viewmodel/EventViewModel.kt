@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.mystartkotlin.repository.EventRepository
+import com.example.mystartkotlin.datasource.room.Event
 import kotlinx.coroutines.launch
 
 class EventViewModel(private val repository: EventRepository) : ViewModel() {

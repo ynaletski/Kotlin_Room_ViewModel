@@ -3,15 +3,15 @@
     package="com.example.mystartkotlin">
 
     <application
-        android:name=".EventsApplication"
+        android:name=".dependency.EventsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyStartKotlin">
-        <activity android:name=".AddEventActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.AddEventActivity" />
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

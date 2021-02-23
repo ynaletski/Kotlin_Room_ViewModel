@@ -1,4 +1,4 @@
-package com.example.mystartkotlin
+package com.example.mystartkotlin.datasource.room
 
 import androidx.room.Dao
 import androidx.room.Insert
