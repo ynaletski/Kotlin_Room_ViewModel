@@ -48,4 +48,12 @@
         app:layout_constraintTop_toBottomOf="@+id/description"
         tools:ignore="HardcodedText" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#655beb"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        tools:ignore="MissingConstraints" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

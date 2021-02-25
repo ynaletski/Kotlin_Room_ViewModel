@@ -3,16 +3,22 @@ package com.example.mystartkotlin.ui
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.mystartkotlin.EventViewModel
 import com.example.mystartkotlin.EventViewModelFactory
 import com.example.mystartkotlin.dependency.EventsApplication
 import com.example.mystartkotlin.R
 import com.example.mystartkotlin.datasource.room.Event
+import java.lang.RuntimeException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -31,20 +37,28 @@ class AddEventActivity : AppCompatActivity() {
         NUMB_SCALE, NUMB_NULL, DESCRIPTION_NULL, NO_ERROR
     }
 
+    enum class Fragments {
+        NUMBER, DESCRIPTION
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_add)
+
+        initializeView()
+
     }
 
     // Метод обработки нажатия на кнопку Отменить
     fun goToMainActivityWithoutEvent(view: View?) {
+        stopProgressFragments()
         finish()
     }
 
     //Метод обработки нажатия на кнопку Подтвердить
     @SuppressLint("SetTextI18n")
     fun goToMainActivityWithEvent(view: View?) {
-        initializeView()
+        //initializeView()
         when (validationOfData()) {
             Error.NO_ERROR -> sendDataToMainActivity()
             Error.NUMB_NULL -> errorNumber.text = resources.getString(R.string.errorNumbNull)
@@ -64,6 +78,10 @@ class AddEventActivity : AppCompatActivity() {
         val date = Date()
         @SuppressLint("SimpleDateFormat") val formatForDate = SimpleDateFormat("hh:mm dd.MM.yyyy")
         dateAndTime.setText(formatForDate.format(date))
+
+        textListener(noteNumber, Fragments.NUMBER)
+        textListener(noteDescription, Fragments.DESCRIPTION)
+
     }
 
     //функция для отправки данных на первый activity
@@ -78,6 +96,7 @@ class AddEventActivity : AppCompatActivity() {
         ))
 
         setResult(RESULT_OK, intent)
+        stopProgressFragments()
         finish()
     }
 
@@ -98,4 +117,39 @@ class AddEventActivity : AppCompatActivity() {
             Error.NUMB_NULL
         }
     }
+
+    private fun stopProgressFragments() {
+        val fragmentNumber: ProgressFragment = supportFragmentManager.findFragmentById(R.id.fragmentNumber) as ProgressFragment
+        fragmentNumber.threadProgress.interrupt()
+        val fragmentDescription: ProgressFragment = supportFragmentManager.findFragmentById(R.id.fragmentDescription) as ProgressFragment
+        fragmentDescription.threadProgress.interrupt()
+
+    }
+
+    private fun textListener(text: EditText, fragments: Fragments) {
+        text.addTextChangedListener(object : TextWatcher {
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                when (fragments) {
+                    Fragments.NUMBER -> {
+                        val fragmentNumber: Fragment = FragmentManager.findFragment(findViewById(R.id.fragmentNumber))
+                        fragmentNumber.view?.findViewById<ProgressBar>(R.id.indicator)?.progress = try {
+                            s.toString().toInt()
+                        } catch (e: RuntimeException) {
+                            0
+                        }
+                    }
+                    Fragments.DESCRIPTION -> {
+                        val fragmentDescription: Fragment = FragmentManager.findFragment(findViewById(R.id.fragmentDescription))
+                        fragmentDescription.view?.findViewById<ProgressBar>(R.id.indicator)?.progress = start
+                    }
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
 }

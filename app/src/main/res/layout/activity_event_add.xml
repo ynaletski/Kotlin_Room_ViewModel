@@ -118,23 +118,19 @@
         android:id="@+id/errorNumb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="4dp"
         android:textColor="#F44336"
-        app:layout_constraintStart_toEndOf="@+id/suggestNumb"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/fragmentNumber"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentNumber" />
 
     <TextView
         android:id="@+id/errorDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="4dp"
         android:textColor="#F44336"
-        app:layout_constraintStart_toEndOf="@+id/suggestDescriptor"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumb" />
+        app:layout_constraintStart_toStartOf="@+id/fragmentDescription"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentDescription" />
 
     <TextView
         android:id="@+id/errorDateTime"
@@ -146,5 +142,27 @@
         android:textColor="#F44336"
         app:layout_constraintStart_toEndOf="@+id/timeDate"
         app:layout_constraintTop_toBottomOf="@+id/editTextDescriptor" />
+
+    <fragment
+        android:id="@+id/fragmentNumber"
+        android:name="com.example.mystartkotlin.ui.ProgressFragment"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <fragment
+        android:id="@+id/fragmentDescription"
+        android:name="com.example.mystartkotlin.ui.ProgressFragment"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumb" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
