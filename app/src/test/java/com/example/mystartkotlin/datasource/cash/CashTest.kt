@@ -13,16 +13,14 @@ class CashTest : TestCase() {
 
     @Before
     override fun setUp() {
-        events.add(Event(0,"0","00","000"))
-        events.add(Event(1,"1","11","111"))
+        Cash.addEvent("0", "00", "000")
+        Cash.addEvent("1", "11", "111")
+        events.add(Event(0, "0", "00", "000"))
+        events.add(Event(0, "1", "11", "111"))
     }
 
     @Test
     fun testGetEvents() {
-        val eventsTwo: ArrayList<Event> = ArrayList()
-        eventsTwo.add(Event(0,"0","00","000"))
-        eventsTwo.add(Event(1,"1","11","111"))
-
-        Assert.assertEquals(events, eventsTwo)
+        Assert.assertEquals(events, Cash.getEvents())
     }
 }
