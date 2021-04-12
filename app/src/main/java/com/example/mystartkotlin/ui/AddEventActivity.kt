@@ -10,12 +10,15 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.mystartkotlin.viewmodel.EventViewModel
 import com.example.mystartkotlin.R
 import com.example.mystartkotlin.datasource.room.Event
+import com.example.mystartkotlin.di.EventsApplication
+import com.example.mystartkotlin.viewmodel.EventViewModelFactory
 import com.example.mystartkotlin.viewmodel.HelloViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.lang.RuntimeException
@@ -31,11 +34,11 @@ class AddEventActivity : AppCompatActivity() {
 
     private val helloViewModel: HelloViewModel by viewModel()
 
-    private val eventViewModel: EventViewModel by viewModel()
+    //private val eventViewModel: EventViewModel by viewModel()
 
-    /*private val eventViewModel: EventViewModel by viewModels {
+    private val eventViewModel: EventViewModel by viewModels {
         EventViewModelFactory((application as EventsApplication).repository)
-    }*/
+    }
 
     enum class Error {
         NUMB_SCALE, NUMB_NULL, DESCRIPTION_NULL, NO_ERROR
