@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
@@ -21,17 +20,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mystartkotlin.*
 import com.example.mystartkotlin.biometric.BiometricCipher
 import com.example.mystartkotlin.biometric.authenticate
-import com.example.mystartkotlin.dependency.EventsApplication
 import com.example.mystartkotlin.datasource.room.Event
+import com.example.mystartkotlin.viewmodel.EventViewModel
+import com.example.mystartkotlin.viewmodel.HelloViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private val requestTwoAct = 1
-    private val eventViewModel: EventViewModel by viewModels {
+
+    private val helloViewModel: HelloViewModel by viewModel()
+
+    private val eventViewModel: EventViewModel by viewModel()
+
+    /*private val eventViewModel: EventViewModel by viewModels {
         EventViewModelFactory((application as EventsApplication).repository)
-    }
+    }*/
 
     private lateinit var deleteAll: FloatingActionButton
     private lateinit var recyclerView: RecyclerView
@@ -40,6 +46,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        Log.d("MainActivity onCreate", helloViewModel.sayHello())
 
         initialize()
 
@@ -73,6 +81,11 @@ class MainActivity : AppCompatActivity() {
             deleteConfirmBiometricAuth()
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("MainActivity onDestroy", helloViewModel.sayBye())
     }
 
     // Метод обработки нажатия на кнопку

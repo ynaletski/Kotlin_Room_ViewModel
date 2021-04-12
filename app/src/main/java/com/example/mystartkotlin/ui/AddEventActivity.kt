@@ -5,19 +5,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.mystartkotlin.EventViewModel
-import com.example.mystartkotlin.EventViewModelFactory
-import com.example.mystartkotlin.dependency.EventsApplication
+import com.example.mystartkotlin.viewmodel.EventViewModel
 import com.example.mystartkotlin.R
 import com.example.mystartkotlin.datasource.room.Event
+import com.example.mystartkotlin.viewmodel.HelloViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.lang.RuntimeException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,9 +29,13 @@ class AddEventActivity : AppCompatActivity() {
     private lateinit var errorNumber: TextView
     private lateinit var errorDescription: TextView
 
-    private val eventViewModel: EventViewModel by viewModels {
+    private val helloViewModel: HelloViewModel by viewModel()
+
+    private val eventViewModel: EventViewModel by viewModel()
+
+    /*private val eventViewModel: EventViewModel by viewModels {
         EventViewModelFactory((application as EventsApplication).repository)
-    }
+    }*/
 
     enum class Error {
         NUMB_SCALE, NUMB_NULL, DESCRIPTION_NULL, NO_ERROR
@@ -45,8 +49,15 @@ class AddEventActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_add)
 
+        Log.d("AddActivity onCreate", helloViewModel.sayHello())
+
         initializeView()
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("AddActivity onDestroy", helloViewModel.sayBye())
     }
 
     // Метод обработки нажатия на кнопку Отменить

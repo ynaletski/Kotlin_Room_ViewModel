@@ -1,18 +1,12 @@
 package com.example.mystartkotlin.ui
 
 import android.os.Bundle
-import android.text.Editable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ProgressBar
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import com.example.mystartkotlin.R
-import java.lang.NullPointerException
-import android.text.TextWatcher as TextWatcher
 
 class ProgressFragment : Fragment() {
 

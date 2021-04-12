@@ -9,6 +9,7 @@ import com.example.mystartkotlin.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.core.scope.Scope
 
 @Database(entities = [Event::class], version = 1)
 abstract class EventRoomDatabase : RoomDatabase() {
@@ -20,8 +21,8 @@ abstract class EventRoomDatabase : RoomDatabase() {
         private var INSTANCE: EventRoomDatabase? = null
 
         fun getDatabase(
-                context: Context,
-                scope: CoroutineScope
+            context: Context,
+            scope: CoroutineScope
         ): EventRoomDatabase {
 
             return INSTANCE ?: synchronized(this) {
@@ -39,7 +40,7 @@ abstract class EventRoomDatabase : RoomDatabase() {
             }
         }
 
-        private class EventDatabaseCallback(
+        class EventDatabaseCallback(
                 private val scope: CoroutineScope
         ) : RoomDatabase.Callback() {
 

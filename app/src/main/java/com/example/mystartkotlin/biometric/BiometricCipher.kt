@@ -91,7 +91,7 @@ class BiometricCipher(
     companion object {
         private const val TRANSFORMATION = "$KEY_ALGORITHM_AES/" +
                 "$BLOCK_MODE_GCM/" +
-                "$ENCRYPTION_PADDING_NONE"
+                ENCRYPTION_PADDING_NONE
 
         private const val KEYSTORE_PROVIDER = "AndroidKeyStore"
         private const val AUTH_TAG_SIZE = 128

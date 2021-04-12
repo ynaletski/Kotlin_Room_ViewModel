@@ -1,15 +1,16 @@
-package com.example.mystartkotlin
+package com.example.mystartkotlin.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.mystartkotlin.repository.EventRepository
 import com.example.mystartkotlin.datasource.room.Event
+import com.example.mystartkotlin.repository.IEventRepository
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
-class EventViewModel(private val repository: EventRepository) : ViewModel() {
+class EventViewModel(private val repository: IEventRepository) : ViewModel() {
 
     val allEvents: LiveData<List<Event>> = repository.allEvents.asLiveData()
 
@@ -27,14 +28,9 @@ class EventViewModel(private val repository: EventRepository) : ViewModel() {
 
     val countEvents: LiveData<Int> = repository.countEvents.asLiveData()
 
-}
-
-class EventViewModelFactory(private val repository: EventRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(EventViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return EventViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
     }
+
 }
