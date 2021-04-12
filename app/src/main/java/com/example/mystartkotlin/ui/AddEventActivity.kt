@@ -75,7 +75,7 @@ class AddEventActivity : AppCompatActivity() {
             Error.NUMB_NULL -> errorNumber.text = resources.getString(R.string.errorNumbNull)
             Error.NUMB_SCALE -> errorNumber.text = resources.getString(R.string.errorNumbScale)
             Error.DESCRIPTION_NULL -> errorDescription.text =
-                    resources.getString(R.string.errorDescriptionNull)
+                resources.getString(R.string.errorDescriptionNull)
         }
     }
 
@@ -100,11 +100,14 @@ class AddEventActivity : AppCompatActivity() {
 
         val intent = Intent(this, MainActivity::class.java)
 
-        eventViewModel.insert(Event(null,
+        eventViewModel.insert(
+            Event(
+                null,
                 noteNumber.text.toString(),
                 noteDescription.text.toString(),
                 dateAndTime.text.toString()
-        ))
+            )
+        )
 
         setResult(RESULT_OK, intent)
         stopProgressFragments()
@@ -114,7 +117,7 @@ class AddEventActivity : AppCompatActivity() {
     private fun validationOfData(): Error {
         return if (noteNumber.text.isNotEmpty()) {
             if (noteNumber.text.toString().toInt() < 1 ||
-                    noteNumber.text.toString().toInt() > 1000
+                noteNumber.text.toString().toInt() > 1000
             ) {
                 Error.NUMB_SCALE
             } else {
@@ -130,9 +133,11 @@ class AddEventActivity : AppCompatActivity() {
     }
 
     private fun stopProgressFragments() {
-        val fragmentNumber: ProgressFragment = supportFragmentManager.findFragmentById(R.id.fragmentNumber) as ProgressFragment
+        val fragmentNumber: ProgressFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentNumber) as ProgressFragment
         fragmentNumber.threadProgress.interrupt()
-        val fragmentDescription: ProgressFragment = supportFragmentManager.findFragmentById(R.id.fragmentDescription) as ProgressFragment
+        val fragmentDescription: ProgressFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentDescription) as ProgressFragment
         fragmentDescription.threadProgress.interrupt()
 
     }
@@ -145,16 +150,20 @@ class AddEventActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 when (fragments) {
                     Fragments.NUMBER -> {
-                        val fragmentNumber: Fragment = FragmentManager.findFragment(findViewById(R.id.fragmentNumber))
-                        fragmentNumber.view?.findViewById<ProgressBar>(R.id.indicator)?.progress = try {
-                            s.toString().toInt()
-                        } catch (e: RuntimeException) {
-                            0
-                        }
+                        val fragmentNumber: Fragment =
+                            FragmentManager.findFragment(findViewById(R.id.fragmentNumber))
+                        fragmentNumber.view?.findViewById<ProgressBar>(R.id.indicator)?.progress =
+                            try {
+                                s.toString().toInt()
+                            } catch (e: RuntimeException) {
+                                0
+                            }
                     }
                     Fragments.DESCRIPTION -> {
-                        val fragmentDescription: Fragment = FragmentManager.findFragment(findViewById(R.id.fragmentDescription))
-                        fragmentDescription.view?.findViewById<ProgressBar>(R.id.indicator)?.progress = start
+                        val fragmentDescription: Fragment =
+                            FragmentManager.findFragment(findViewById(R.id.fragmentDescription))
+                        fragmentDescription.view?.findViewById<ProgressBar>(R.id.indicator)?.progress =
+                            start
                     }
                 }
             }

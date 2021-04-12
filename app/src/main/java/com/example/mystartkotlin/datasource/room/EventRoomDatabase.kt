@@ -9,7 +9,6 @@ import com.example.mystartkotlin.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.core.scope.Scope
 
 @Database(entities = [Event::class], version = 1)
 abstract class EventRoomDatabase : RoomDatabase() {
@@ -27,13 +26,13 @@ abstract class EventRoomDatabase : RoomDatabase() {
 
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        EventRoomDatabase::class.java,
-                        "event_database"
+                    context.applicationContext,
+                    EventRoomDatabase::class.java,
+                    "event_database"
                 )
-                        .fallbackToDestructiveMigration()
-                        .addCallback(EventDatabaseCallback(scope))
-                        .build()
+                    .fallbackToDestructiveMigration()
+                    .addCallback(EventDatabaseCallback(scope))
+                    .build()
                 INSTANCE = instance
                 // return instance
                 instance
@@ -41,7 +40,7 @@ abstract class EventRoomDatabase : RoomDatabase() {
         }
 
         class EventDatabaseCallback(
-                private val scope: CoroutineScope
+            private val scope: CoroutineScope
         ) : RoomDatabase.Callback() {
 
             override fun onCreate(db: SupportSQLiteDatabase) {
@@ -57,10 +56,12 @@ abstract class EventRoomDatabase : RoomDatabase() {
 
         suspend fun populateDatabase(eventDao: EventDao) {
             eventDao.deleteAll()
-            val event = Event(null,
-                    R.string.defaultNumber.toString(),
-                    R.string.defaultTextDescription.toString(),
-                    R.string.defaultDateTime.toString())
+            val event = Event(
+                null,
+                R.string.defaultNumber.toString(),
+                R.string.defaultTextDescription.toString(),
+                R.string.defaultDateTime.toString()
+            )
             eventDao.insert(event)
         }
     }

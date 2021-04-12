@@ -7,14 +7,14 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "events")
 data class Event(
         @PrimaryKey
-        (autoGenerate = true) val id: Int?,
+                (autoGenerate = true) val id: Int?,
 
         @ColumnInfo
-        (name = "number") var number: String?,
+                (name = "number") var number: String?,
 
         @ColumnInfo
-        (name = "description") var description: String?,
+                (name = "description") var description: String?,
 
         @ColumnInfo
-        (name = "dateTime") var dateTime: String?
+                (name = "dateTime") var dateTime: String?
 )

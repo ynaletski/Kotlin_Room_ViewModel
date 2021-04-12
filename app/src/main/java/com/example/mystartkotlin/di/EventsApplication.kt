@@ -10,7 +10,7 @@ class EventsApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        startKoin{
+        startKoin {
             androidContext(this@EventsApplication)
             androidLogger()
             modules(eventModule)

@@ -15,8 +15,8 @@ import com.example.mystartkotlin.datasource.room.Event
 import java.util.*
 
 internal class EventAdapter(
-        context: Context?,  /*ArrayList<Event> events,*/
-        RemoveClickListener: RemoveClickListener
+    context: Context?,  /*ArrayList<Event> events,*/
+    RemoveClickListener: RemoveClickListener
 ) : RecyclerView.Adapter<EventViewHolder>() {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private val events = ArrayList<Event>()

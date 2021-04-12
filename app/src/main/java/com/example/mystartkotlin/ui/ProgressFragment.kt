@@ -13,9 +13,9 @@ class ProgressFragment : Fragment() {
     lateinit var threadProgress: Thread
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
         val view: View = inflater.inflate(R.layout.progress_fragment, container, false)

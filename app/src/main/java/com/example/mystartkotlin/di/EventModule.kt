@@ -19,7 +19,7 @@ val eventModule = module {
 
     single { get<EventRoomDatabase>().eventDao() }
 
-    single <IEventRepository> { EventRepository(get()) }
+    single<IEventRepository> { EventRepository(get()) }
 
     viewModel { EventViewModel(get()) }
 

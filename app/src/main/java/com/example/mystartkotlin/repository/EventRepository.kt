@@ -27,6 +27,6 @@ class EventRepository(private val eventDao: EventDao) : IEventRepository {
         eventDao.deleteByEventId(id)
     }
 
-   override val countEvents: Flow<Int> = eventDao.getCountEvents()
+    override val countEvents: Flow<Int> = eventDao.getCountEvents()
 
 }

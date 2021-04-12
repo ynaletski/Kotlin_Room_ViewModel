@@ -14,11 +14,11 @@ object Cash {
         return events[position]
     }
 
-    private fun validateEvent(numberEvent: String, descriptionEvent: String): Boolean{
+    private fun validateEvent(numberEvent: String, descriptionEvent: String): Boolean {
         var validate = true
         for (i in 0 until events.size) {
             if (getEvents(i).description == descriptionEvent &&
-                    getEvents(i).number == numberEvent
+                getEvents(i).number == numberEvent
             ) {
                 validate = false
                 break
@@ -29,7 +29,7 @@ object Cash {
 
     fun addEvent(numberEvent: String, descriptionEvent: String, timeEvent: String) {
         if (validateEvent(numberEvent, descriptionEvent)) {
-            events.add(Event(0,numberEvent, descriptionEvent, timeEvent))
+            events.add(Event(0, numberEvent, descriptionEvent, timeEvent))
         }
     }
 
