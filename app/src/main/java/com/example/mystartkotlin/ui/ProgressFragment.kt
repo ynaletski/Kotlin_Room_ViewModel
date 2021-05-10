@@ -16,7 +16,7 @@ class ProgressFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val view: View = inflater.inflate(R.layout.progress_fragment, container, false)
         val indicatorBar: ProgressBar = view.findViewById(R.id.indicator)
