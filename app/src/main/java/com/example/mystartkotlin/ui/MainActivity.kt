@@ -115,12 +115,12 @@ class MainActivity : AppCompatActivity() {
             this.setTitle(R.string.dialogTitle)
                 .setMessage(R.string.dialogMessage)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton("Yes") { _, _ ->
-                    Toast.makeText(applicationContext, "удаление", Toast.LENGTH_LONG).show()
+                .setPositiveButton(R.string.buttonYes) { _, _ ->
+                    Toast.makeText(applicationContext, R.string.descriptionProcessDeletion, Toast.LENGTH_LONG).show()
                     eventViewModel.deleteAll()
                 }
-                .setNeutralButton("Cancel") { _, _ ->
-                    Toast.makeText(applicationContext, "действие отменено", Toast.LENGTH_LONG)
+                .setNeutralButton(R.string.buttonCancel) { _, _ ->
+                    Toast.makeText(applicationContext, R.string.descriptionProcessActionCanceled, Toast.LENGTH_LONG)
                         .show()
                 }.create()
         }

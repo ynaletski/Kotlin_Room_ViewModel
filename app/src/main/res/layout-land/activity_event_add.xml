@@ -14,7 +14,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="15dp"
-        android:text="Введите номер:"
+        android:text="@string/promptNumb"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
@@ -26,7 +26,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="5dp"
-        android:text="Опишите событие:"
+        android:text="@string/promptDescription"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNumb"
         tools:ignore="HardcodedText" />
@@ -38,7 +38,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="5dp"
-        android:text="Дата и время создания:"
+        android:text="@string/promptDateAndTime"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDescriptor"
         tools:ignore="HardcodedText" />
@@ -51,7 +51,7 @@
         android:layout_marginLeft="216dp"
         android:layout_marginBottom="28dp"
         android:onClick="goToMainActivityWithoutEvent"
-        android:text="Отменить"
+        android:text="@string/buttonNameCancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
@@ -64,7 +64,7 @@
         android:layout_marginLeft="64dp"
         android:layout_marginBottom="28dp"
         android:onClick="goToMainActivityWithEvent"
-        android:text="Подтвердить"
+        android:text="@string/buttonNameConfirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonCancel"
         tools:ignore="HardcodedText" />
@@ -78,7 +78,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
-        android:hint="1...100"
+        android:hint="@string/rangeOfValues"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +94,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
-        android:hint="Описание"
+        android:hint="@string/description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/suggestDescriptor"

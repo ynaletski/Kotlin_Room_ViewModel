@@ -1,0 +1,43 @@
+<resources>
+    //app name
+    <string name="app_name">Заметки</string>
+
+    //defaults values
+    <string name="defaultNumber">1</string>
+    <string name="defaultTextDescription"> Для добавления события нажмите кнопку Добавить событие.
+                                        Подтвердите создание либо отмените, нажав на
+                                        соответствующие кнопки. Для редактирования и удаления
+                                        события, так же необходимо нажать на соответствующие кнопки. </string>
+    <string name="defaultDateTime">20.20.2020 02:02</string>
+
+    //button delete all
+    <string name="dialogTitle">Удалить Все</string>
+    <string name="dialogMessage">Вы уверены что хотите удалить все записи?</string>
+    <string name="buttonYes">Да</string>
+    <string name="buttonCancel">Отмена</string>
+    <string name="descriptionProcessDeletion">удаление</string>
+    <string name="descriptionProcessActionCanceled">действие отменено</string>
+
+    //main activity
+    <string name="addAddButtonName">Добавить событие</string>
+
+    //event item
+    <string name="buttonNameDelete">Удалить</string>
+
+    //add event activity
+    <string name="promptNumb">Введите номер:</string>
+    <string name="promptDescription">Опишите событие:</string>
+    <string name="promptDateAndTime">Дата и время создания:</string>
+    <string name="buttonNameCancel">Отменить</string>
+    <string name="buttonNameConfirm">Подтвердить</string>
+    <string name="rangeOfValues">1...100</string>
+    <string name="description">Описание</string>
+    //add event activity (errors)
+    <string name="errorNumbScale">Введите: 1–1000</string>
+    <string name="errorNumbNull">Введите значение</string>
+    <string name="errorDescriptionNull">Введите описание</string>
+
+    
+    
+    
+</resources>

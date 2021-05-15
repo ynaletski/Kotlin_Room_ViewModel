@@ -9,19 +9,19 @@ class EventRepository(private val eventDao: EventDao) : IEventRepository {
 
     override val allEvents: Flow<List<Event>> = eventDao.getAllEventsUsingFlow()
 
-    @Suppress("RedundantSuspendModifier")
+    //@Suppress("RedundantSuspendModifier")
     @WorkerThread
     override suspend fun insert(event: Event) {
         eventDao.insert(event)
     }
 
-    @Suppress
+    //@Suppress
     @WorkerThread
     override suspend fun deleteAll() {
         eventDao.deleteAll()
     }
 
-    @Suppress
+    //@Suppress
     @WorkerThread
     override suspend fun deleteByEventId(id: Int) {
         eventDao.deleteByEventId(id)

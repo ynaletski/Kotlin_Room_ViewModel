@@ -1,16 +1,43 @@
 <resources>
-    <string name="app_name">MyStartKotlin</string>
+    //app name
+    <string name="app_name">Notes</string>
+
+    //defaults values
     <string name="defaultNumber">1</string>
-    <string name="defaultTextDescription"> Для добавления события нажмите кнопку Добавить событие.
-                                        Подтвердите создание либо отмените, нажав на
-                                        соответствующие кнопки. Для редактирования и удаления
-                                        события, так же необходимо нажать на соответствующие кнопки. </string>
+    <string name="defaultTextDescription"> To add an event, click the Add Event button.
+                                        Confirm creation or cancel by clicking on
+                                        corresponding buttons. To edit and delete
+                                        events, you also need to click on the corresponding buttons. </string>
     <string name="defaultDateTime">20.20.2020 02:02</string>
-    <string name="errorNumbScale">Введите: 1–1000</string>
-    <string name="errorNumbNull">Введите значение</string>
-    <string name="errorDescriptionNull">Введите описание</string>
 
-    <string name="dialogTitle">Удалить Все</string>
-    <string name="dialogMessage">Вы уверены что хотите удалить все записи?</string>
+    //button delete all
+    <string name="dialogTitle">Delete everything</string>
+    <string name="dialogMessage">Are you sure you want to delete all entries?</string>
+    <string name="buttonYes">YES</string>
+    <string name="buttonCancel">Cancel</string>
+    <string name="descriptionProcessDeletion">deletion</string>
+    <string name="descriptionProcessActionCanceled">action canceled</string>
 
+    //main activity
+    <string name="addAddButtonName">Add an event</string>
+
+    //event item
+    <string name="buttonNameDelete">Delete</string>
+
+    //add event activity
+    <string name="promptNumb">Enter the number:</string>
+    <string name="promptDescription">Describe the event:</string>
+    <string name="promptDateAndTime">Date and time of creation:</string>
+    <string name="buttonNameCancel">Cancel</string>
+    <string name="buttonNameConfirm">Confirm</string>
+    <string name="rangeOfValues">1...100</string>
+    <string name="description">Description</string>
+    //add event activity (errors)
+    <string name="errorNumbScale">Enter: 1–1000</string>
+    <string name="errorNumbNull">Enter value</string>
+    <string name="errorDescriptionNull">Enter a description</string>
+
+    
+    
+    
 </resources>
