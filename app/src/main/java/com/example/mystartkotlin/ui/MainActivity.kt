@@ -137,9 +137,9 @@ class MainActivity : AppCompatActivity() {
             val biometricCipher = BiometricCipher(this.applicationContext)
             val encryptor = biometricCipher.getEncryptor()
 
-            val authPrompt = Class3BiometricAuthPrompt.Builder("Strong biometry", "dismiss").apply {
-                setSubtitle("Input your biometry")
-                setDescription("We need your finger")
+            val authPrompt = Class3BiometricAuthPrompt.Builder(resources.getString(R.string.titleBiometric), resources.getString(R.string.dismissBiometric)).apply {
+                setSubtitle(resources.getString(R.string.subtitleBiometric))
+                setDescription(resources.getString(R.string.descriptionBiometric))
                 setConfirmationRequired(true)
             }.build()
 

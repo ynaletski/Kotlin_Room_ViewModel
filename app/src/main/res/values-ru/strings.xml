@@ -10,13 +10,17 @@
                                         события, так же необходимо нажать на соответствующие кнопки. </string>
     <string name="defaultDateTime">20.20.2020 02:02</string>
 
-    //button delete all
+    //button delete all (biometric)
     <string name="dialogTitle">Удалить Все</string>
     <string name="dialogMessage">Вы уверены что хотите удалить все записи?</string>
     <string name="buttonYes">Да</string>
     <string name="buttonCancel">Отмена</string>
     <string name="descriptionProcessDeletion">удаление</string>
     <string name="descriptionProcessActionCanceled">действие отменено</string>
+    <string name="dismissBiometric">Отклонить</string>
+    <string name="subtitleBiometric">Введите свои данные</string>
+    <string name="titleBiometric">Проверка данных</string>
+    <string name="descriptionBiometric">Подтвердите отпечаток пальца</string>
 
     //main activity
     <string name="addAddButtonName">Добавить событие</string>
@@ -37,7 +41,4 @@
     <string name="errorNumbNull">Введите значение</string>
     <string name="errorDescriptionNull">Введите описание</string>
 
-    
-    
-    
 </resources>

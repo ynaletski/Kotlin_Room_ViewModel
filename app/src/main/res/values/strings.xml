@@ -17,6 +17,10 @@
     <string name="buttonCancel">Cancel</string>
     <string name="descriptionProcessDeletion">deletion</string>
     <string name="descriptionProcessActionCanceled">action canceled</string>
+    <string name="dismissBiometric">Dismiss</string>
+    <string name="subtitleBiometric">Input your biometry</string>
+    <string name="titleBiometric">Data checking</string>
+    <string name="descriptionBiometric">We need your finger</string>
 
     //main activity
     <string name="addAddButtonName">Add an event</string>
