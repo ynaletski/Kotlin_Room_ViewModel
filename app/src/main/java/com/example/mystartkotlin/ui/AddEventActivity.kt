@@ -14,16 +14,17 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.mystartkotlin.viewmodel.EventViewModel
+import com.example.mystartkotlin.ui.viewmodel.EventViewModel
 import com.example.mystartkotlin.R
 import com.example.mystartkotlin.datasource.room.Event
 import com.example.mystartkotlin.di.EventsApplication
-import com.example.mystartkotlin.viewmodel.EventViewModelFactory
-import com.example.mystartkotlin.viewmodel.HelloViewModel
+import com.example.mystartkotlin.ui.viewmodel.EventViewModelFactory
+import com.example.mystartkotlin.ui.viewmodel.HelloViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.lang.RuntimeException
+
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class AddEventActivity : AppCompatActivity() {
     private lateinit var dateAndTime: EditText
@@ -46,6 +47,12 @@ class AddEventActivity : AppCompatActivity() {
 
     enum class Fragments {
         NUMBER, DESCRIPTION
+    }
+
+    private val textWatcher = object : TextWatcher {
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun afterTextChanged(s: Editable?) {}
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,7 +98,6 @@ class AddEventActivity : AppCompatActivity() {
         val date = Date()
         @SuppressLint("SimpleDateFormat") val formatForDate = SimpleDateFormat("hh:mm dd.MM.yyyy")
         dateAndTime.setText(formatForDate.format(date))
-
         textListener(noteNumber, Fragments.NUMBER)
         textListener(noteDescription, Fragments.DESCRIPTION)
 
@@ -141,14 +147,10 @@ class AddEventActivity : AppCompatActivity() {
         val fragmentDescription: ProgressFragment =
                 supportFragmentManager.findFragmentById(R.id.fragmentDescription) as ProgressFragment
         fragmentDescription.threadProgress.interrupt()
-
     }
 
     private fun textListener(text: EditText, fragments: Fragments) {
-        text.addTextChangedListener(object : TextWatcher {
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
+        class TextWatcherImpl(instance: TextWatcher) : TextWatcher by instance {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 when (fragments) {
                     Fragments.NUMBER -> {
@@ -169,10 +171,35 @@ class AddEventActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+        text.addTextChangedListener(TextWatcherImpl(textWatcher))
 
-            override fun afterTextChanged(s: Editable?) {}
-        })
+        //solution without delegate
+        /*text.addTextChangedListener( object : TextWatcher {
 
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    when (fragments) {
+                        Fragments.NUMBER -> {
+                            val fragmentNumber: Fragment =
+                                    FragmentManager.findFragment(findViewById(R.id.fragmentNumber))
+                            fragmentNumber.view?.findViewById<ProgressBar>(R.id.indicator)?.progress =
+                                    try {
+                                        s.toString().toInt()
+                                    } catch (e: RuntimeException) {
+                                        0
+                                    }
+                        }
+                        Fragments.DESCRIPTION -> {
+                            val fragmentDescription: Fragment =
+                                    FragmentManager.findFragment(findViewById(R.id.fragmentDescription))
+                            fragmentDescription.view?.findViewById<ProgressBar>(R.id.indicator)?.progress =
+                                    start
+                        }
+                    }
+                }
+                override fun afterTextChanged(s: Editable?) {}
+            })*/
     }
-
 }

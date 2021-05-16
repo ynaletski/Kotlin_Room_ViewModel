@@ -1,12 +1,11 @@
-package com.example.mystartkotlin.viewmodel
+package com.example.mystartkotlin.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.mystartkotlin.repository.EventRepository
 import com.example.mystartkotlin.datasource.room.Event
-import com.example.mystartkotlin.repository.IEventRepository
+import com.example.mystartkotlin.datasource.repository.IEventRepository
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 

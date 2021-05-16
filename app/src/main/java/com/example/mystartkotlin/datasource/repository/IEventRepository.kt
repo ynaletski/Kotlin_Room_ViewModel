@@ -1,4 +1,4 @@
-package com.example.mystartkotlin.repository
+package com.example.mystartkotlin.datasource.repository
 
 import com.example.mystartkotlin.datasource.room.Event
 import kotlinx.coroutines.flow.Flow

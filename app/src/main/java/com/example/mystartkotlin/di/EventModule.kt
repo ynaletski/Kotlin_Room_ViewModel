@@ -1,9 +1,9 @@
 package com.example.mystartkotlin.di
 
 import com.example.mystartkotlin.datasource.room.EventRoomDatabase
-import com.example.mystartkotlin.repository.*
-import com.example.mystartkotlin.viewmodel.EventViewModel
-import com.example.mystartkotlin.viewmodel.HelloViewModel
+import com.example.mystartkotlin.datasource.repository.*
+import com.example.mystartkotlin.ui.viewmodel.EventViewModel
+import com.example.mystartkotlin.ui.viewmodel.HelloViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.android.viewmodel.dsl.viewModel

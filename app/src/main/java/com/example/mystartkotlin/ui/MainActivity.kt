@@ -18,11 +18,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mystartkotlin.*
-import com.example.mystartkotlin.biometric.BiometricCipher
-import com.example.mystartkotlin.biometric.authenticate
+import com.example.feature.biometric.BiometricCipher
+import com.example.feature.biometric.authenticate
 import com.example.mystartkotlin.datasource.room.Event
-import com.example.mystartkotlin.viewmodel.EventViewModel
-import com.example.mystartkotlin.viewmodel.HelloViewModel
+import com.example.mystartkotlin.ui.viewmodel.EventViewModel
+import com.example.mystartkotlin.ui.viewmodel.HelloViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel

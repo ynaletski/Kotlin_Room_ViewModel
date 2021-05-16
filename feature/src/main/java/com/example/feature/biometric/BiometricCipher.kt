@@ -1,4 +1,4 @@
-package com.example.mystartkotlin.biometric
+package com.example.feature.biometric
 
 import android.content.Context
 import android.content.pm.PackageManager

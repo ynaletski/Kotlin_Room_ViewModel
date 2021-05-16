@@ -1,8 +1,8 @@
-package com.example.mystartkotlin.viewmodel
+package com.example.mystartkotlin.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.mystartkotlin.repository.EventRepository
+import com.example.mystartkotlin.datasource.repository.EventRepository
 
 class EventViewModelFactory(private val repository: EventRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
