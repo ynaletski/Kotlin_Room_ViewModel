@@ -1,11 +1,10 @@
-package com.example.mystartkotlin.datasource.cash
+package com.example.mystartkotlin.data.cash
 
-import com.example.mystartkotlin.datasource.room.Event
+import com.example.mystartkotlin.data.room.Event
 import junit.framework.TestCase
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import kotlin.math.E
 
 class CashTest : TestCase() {
 

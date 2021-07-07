@@ -1,4 +1,4 @@
-package com.example.mystartkotlin.datasource.repository
+package com.example.mystartkotlin.data.repository
 
 interface HelloRepository {
     fun giveHello(): String

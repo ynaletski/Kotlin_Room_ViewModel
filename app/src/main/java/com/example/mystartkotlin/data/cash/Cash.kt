@@ -1,6 +1,6 @@
-package com.example.mystartkotlin.datasource.cash
+package com.example.mystartkotlin.data.cash
 
-import com.example.mystartkotlin.datasource.room.Event
+import com.example.mystartkotlin.data.room.Event
 
 object Cash {
 

@@ -1,6 +1,6 @@
-package com.example.mystartkotlin.datasource.repository
+package com.example.mystartkotlin.data.repository
 
-import com.example.mystartkotlin.datasource.room.Event
+import com.example.mystartkotlin.data.room.Event
 import kotlinx.coroutines.flow.Flow
 
 interface IEventRepository {

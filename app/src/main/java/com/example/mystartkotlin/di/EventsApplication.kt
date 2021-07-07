@@ -1,8 +1,8 @@
 package com.example.mystartkotlin.di
 
 import android.app.Application
-import com.example.mystartkotlin.datasource.room.EventRoomDatabase
-import com.example.mystartkotlin.datasource.repository.EventRepository
+import com.example.mystartkotlin.data.room.EventRoomDatabase
+import com.example.mystartkotlin.data.repository.EventRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext

@@ -1,4 +1,4 @@
-package com.example.mystartkotlin.ui
+package com.example.mystartkotlin.presentation
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -14,12 +14,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.mystartkotlin.ui.viewmodel.EventViewModel
+import com.example.mystartkotlin.presentation.viewmodel.EventViewModel
 import com.example.mystartkotlin.R
-import com.example.mystartkotlin.datasource.room.Event
+import com.example.mystartkotlin.data.room.Event
 import com.example.mystartkotlin.di.EventsApplication
-import com.example.mystartkotlin.ui.viewmodel.EventViewModelFactory
-import com.example.mystartkotlin.ui.viewmodel.HelloViewModel
+import com.example.mystartkotlin.presentation.viewmodel.EventViewModelFactory
+import com.example.mystartkotlin.presentation.viewmodel.HelloViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 import java.text.SimpleDateFormat
@@ -84,7 +84,7 @@ class AddEventActivity : AppCompatActivity() {
             Error.NUMB_NULL -> errorNumber.text = resources.getString(R.string.errorNumbNull)
             Error.NUMB_SCALE -> errorNumber.text = resources.getString(R.string.errorNumbScale)
             Error.DESCRIPTION_NULL -> errorDescription.text =
-                    resources.getString(R.string.errorDescriptionNull)
+                resources.getString(R.string.errorDescriptionNull)
         }
     }
 
@@ -109,12 +109,12 @@ class AddEventActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
 
         eventViewModel.insert(
-                Event(
-                        null,
-                        noteNumber.text.toString(),
-                        noteDescription.text.toString(),
-                        dateAndTime.text.toString()
-                )
+            Event(
+                null,
+                noteNumber.text.toString(),
+                noteDescription.text.toString(),
+                dateAndTime.text.toString()
+            )
         )
 
         setResult(RESULT_OK, intent)
@@ -125,7 +125,7 @@ class AddEventActivity : AppCompatActivity() {
     private fun validationOfData(): Error {
         return if (noteNumber.text.isNotEmpty()) {
             if (noteNumber.text.toString().toInt() < 1 ||
-                    noteNumber.text.toString().toInt() > 1000
+                noteNumber.text.toString().toInt() > 1000
             ) {
                 Error.NUMB_SCALE
             } else {
@@ -142,10 +142,10 @@ class AddEventActivity : AppCompatActivity() {
 
     private fun stopProgressFragments() {
         val fragmentNumber: ProgressFragment =
-                supportFragmentManager.findFragmentById(R.id.fragmentNumber) as ProgressFragment
+            supportFragmentManager.findFragmentById(R.id.fragmentNumber) as ProgressFragment
         fragmentNumber.threadProgress.interrupt()
         val fragmentDescription: ProgressFragment =
-                supportFragmentManager.findFragmentById(R.id.fragmentDescription) as ProgressFragment
+            supportFragmentManager.findFragmentById(R.id.fragmentDescription) as ProgressFragment
         fragmentDescription.threadProgress.interrupt()
     }
 
@@ -155,19 +155,19 @@ class AddEventActivity : AppCompatActivity() {
                 when (fragments) {
                     Fragments.NUMBER -> {
                         val fragmentNumber: Fragment =
-                                FragmentManager.findFragment(findViewById(R.id.fragmentNumber))
+                            FragmentManager.findFragment(findViewById(R.id.fragmentNumber))
                         fragmentNumber.view?.findViewById<ProgressBar>(R.id.indicator)?.progress =
-                                try {
-                                    s.toString().toInt()
-                                } catch (e: RuntimeException) {
-                                    0
-                                }
+                            try {
+                                s.toString().toInt()
+                            } catch (e: RuntimeException) {
+                                0
+                            }
                     }
                     Fragments.DESCRIPTION -> {
                         val fragmentDescription: Fragment =
-                                FragmentManager.findFragment(findViewById(R.id.fragmentDescription))
+                            FragmentManager.findFragment(findViewById(R.id.fragmentDescription))
                         fragmentDescription.view?.findViewById<ProgressBar>(R.id.indicator)?.progress =
-                                start
+                            start
                     }
                 }
             }

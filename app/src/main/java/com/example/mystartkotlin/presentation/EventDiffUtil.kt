@@ -1,7 +1,7 @@
-package com.example.mystartkotlin.ui
+package com.example.mystartkotlin.presentation
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.mystartkotlin.datasource.room.Event
+import com.example.mystartkotlin.data.room.Event
 
 internal class EventDiffUtil(
     private val oldList: List<Event>,

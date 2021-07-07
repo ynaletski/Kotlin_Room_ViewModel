@@ -1,10 +1,13 @@
-package com.example.mystartkotlin.ui
+package com.example.mystartkotlin.presentation
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
@@ -20,16 +23,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mystartkotlin.*
 import com.example.feature.biometric.BiometricCipher
 import com.example.feature.biometric.authenticate
-import com.example.mystartkotlin.datasource.room.Event
-import com.example.mystartkotlin.ui.viewmodel.EventViewModel
-import com.example.mystartkotlin.ui.viewmodel.HelloViewModel
+import com.example.mystartkotlin.data.room.Event
+import com.example.mystartkotlin.presentation.viewmodel.EventViewModel
+import com.example.mystartkotlin.presentation.viewmodel.HelloViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val requestTwoAct = 1
+    //private val requestSecondActivity = 1
 
     private val helloViewModel: HelloViewModel by viewModel()
 
@@ -60,11 +64,38 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.adapter = eventAdapter
 
-        eventViewModel.allEvents.observe(this) { events ->
-            events.let { eventAdapter.insertData(it) }
+        lifecycleScope.launch {
+            lifecycleScope.launchWhenStarted {
+                eventViewModel.allEvents.collect { events ->
+                    events.let {
+                        eventAdapter.insertData(it)
+                    }
+                }
+            }
         }
+        //LiveData
+        /*eventViewModel.allEvents.observe(this) { events ->
+            events.let { eventAdapter.insertData(it) }
+        }*/
 
-        eventViewModel.countEvents.observe(this) { count ->
+        lifecycleScope.launch {
+            lifecycleScope.launchWhenStarted {
+                eventViewModel.countEvents.collect { count ->
+                    if (count == 0) {
+                        eventViewModel.insert(
+                            Event(
+                                null,
+                                resources.getString(R.string.defaultNumber),
+                                resources.getString(R.string.defaultTextDescription),
+                                resources.getString(R.string.defaultDateTime)
+                            )
+                        )
+                    }
+                }
+            }
+        }
+        //LiveData
+        /*eventViewModel.countEvents.observe(this) { count ->
             if (count == 0) {
                 eventViewModel.insert(
                     Event(
@@ -75,7 +106,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             }
-        }
+        }*/
 
         deleteAll.setOnClickListener {
             deleteConfirmBiometricAuth()
@@ -90,17 +121,27 @@ class MainActivity : AppCompatActivity() {
 
     // Метод обработки нажатия на кнопку
     fun goToAddEventActivity(view: View?) {
-        val intent = Intent(this, AddEventActivity::class.java)
-        startActivityForResult(intent, requestTwoAct)
+        startResultFromSecondActivity.launch(Intent(this, AddEventActivity::class.java))
+        /*val intent = Intent(this, AddEventActivity::class.java)
+        startActivityForResult(intent, requestSecondActivity)*/
     }
 
     //метод принимающий результат со второй активити()
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    private val startResultFromSecondActivity =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                //eventAdapter.insertData(Cash.getEvents())
+                Log.d("StartActivityForResult", "Activity.RESULT_OK")
+            } else {
+                Log.d("StartActivityForResult", "Activity.RESULT_NOT_OK")
+            }
+        }
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
             //eventAdapter.insertData(Cash.getEvents())
         }
-    }
+    }*/
 
     private fun initialize() {
         recyclerView = findViewById(R.id.eventList)
@@ -116,11 +157,19 @@ class MainActivity : AppCompatActivity() {
                 .setMessage(R.string.dialogMessage)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(R.string.buttonYes) { _, _ ->
-                    Toast.makeText(applicationContext, R.string.descriptionProcessDeletion, Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        applicationContext,
+                        R.string.descriptionProcessDeletion,
+                        Toast.LENGTH_LONG
+                    ).show()
                     eventViewModel.deleteAll()
                 }
                 .setNeutralButton(R.string.buttonCancel) { _, _ ->
-                    Toast.makeText(applicationContext, R.string.descriptionProcessActionCanceled, Toast.LENGTH_LONG)
+                    Toast.makeText(
+                        applicationContext,
+                        R.string.descriptionProcessActionCanceled,
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                 }.create()
         }
@@ -137,7 +186,10 @@ class MainActivity : AppCompatActivity() {
             val biometricCipher = BiometricCipher(this.applicationContext)
             val encryptor = biometricCipher.getEncryptor()
 
-            val authPrompt = Class3BiometricAuthPrompt.Builder(resources.getString(R.string.titleBiometric), resources.getString(R.string.dismissBiometric)).apply {
+            val authPrompt = Class3BiometricAuthPrompt.Builder(
+                resources.getString(R.string.titleBiometric),
+                resources.getString(R.string.dismissBiometric)
+            ).apply {
                 setSubtitle(resources.getString(R.string.subtitleBiometric))
                 setDescription(resources.getString(R.string.descriptionBiometric))
                 setConfirmationRequired(true)

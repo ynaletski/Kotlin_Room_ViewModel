@@ -1,4 +1,4 @@
-package com.example.mystartkotlin.ui
+package com.example.mystartkotlin.presentation
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.mystartkotlin.R
-import com.example.mystartkotlin.ui.EventAdapter.EventViewHolder
-import com.example.mystartkotlin.datasource.room.Event
+import com.example.mystartkotlin.presentation.EventAdapter.EventViewHolder
+import com.example.mystartkotlin.data.room.Event
 import java.util.*
 
 internal class EventAdapter(

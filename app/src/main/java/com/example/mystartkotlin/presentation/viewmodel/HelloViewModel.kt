@@ -1,7 +1,7 @@
-package com.example.mystartkotlin.ui.viewmodel
+package com.example.mystartkotlin.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.example.mystartkotlin.datasource.repository.HelloRepository
+import com.example.mystartkotlin.data.repository.HelloRepository
 
 class HelloViewModel(private val repo: HelloRepository) : ViewModel() {
     fun sayHello() = "${repo.giveHello()} from HelloViewModel"

@@ -1,4 +1,4 @@
-package com.example.mystartkotlin.datasource.room
+package com.example.mystartkotlin.data.room
 
 import android.content.Context
 import androidx.room.Database
