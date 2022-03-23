@@ -1,7 +1,10 @@
 package com.example.mystartkotlin.di
 
+import com.example.mystartkotlin.data.repository.EventRepository
+import com.example.mystartkotlin.data.repository.HelloRepository
+import com.example.mystartkotlin.data.repository.HelloRepositoryImpl
+import com.example.mystartkotlin.data.repository.IEventRepository
 import com.example.mystartkotlin.data.room.EventRoomDatabase
-import com.example.mystartkotlin.data.repository.*
 import com.example.mystartkotlin.presentation.viewmodel.EventViewModel
 import com.example.mystartkotlin.presentation.viewmodel.HelloViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -22,6 +25,4 @@ val eventModule = module {
     single<IEventRepository> { EventRepository(get()) }
 
     viewModel { EventViewModel(get()) }
-
-
 }

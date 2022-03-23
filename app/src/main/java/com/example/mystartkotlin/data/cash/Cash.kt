@@ -32,5 +32,4 @@ object Cash {
             events.add(Event(0, numberEvent, descriptionEvent, timeEvent))
         }
     }
-
 }

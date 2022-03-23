@@ -14,17 +14,15 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.mystartkotlin.presentation.viewmodel.EventViewModel
 import com.example.mystartkotlin.R
 import com.example.mystartkotlin.data.room.Event
 import com.example.mystartkotlin.di.EventsApplication
+import com.example.mystartkotlin.presentation.viewmodel.EventViewModel
 import com.example.mystartkotlin.presentation.viewmodel.EventViewModelFactory
 import com.example.mystartkotlin.presentation.viewmodel.HelloViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
-
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class AddEventActivity : AppCompatActivity() {
     private lateinit var dateAndTime: EditText
@@ -35,7 +33,7 @@ class AddEventActivity : AppCompatActivity() {
 
     private val helloViewModel: HelloViewModel by viewModel()
 
-    //private val eventViewModel: EventViewModel by viewModel()
+    // private val eventViewModel: EventViewModel by viewModel()
 
     private val eventViewModel: EventViewModel by viewModels {
         EventViewModelFactory((application as EventsApplication).repository)
@@ -62,7 +60,6 @@ class AddEventActivity : AppCompatActivity() {
         Log.d("AddActivity onCreate", helloViewModel.sayHello())
 
         initializeView()
-
     }
 
     override fun onDestroy() {
@@ -76,19 +73,19 @@ class AddEventActivity : AppCompatActivity() {
         finish()
     }
 
-    //Метод обработки нажатия на кнопку Подтвердить
+    // Метод обработки нажатия на кнопку Подтвердить
     @SuppressLint("SetTextI18n")
     fun goToMainActivityWithEvent(view: View?) {
         when (validationOfData()) {
             Error.NO_ERROR -> sendDataToMainActivity()
             Error.NUMB_NULL -> errorNumber.text = resources.getString(R.string.errorNumbNull)
             Error.NUMB_SCALE -> errorNumber.text = resources.getString(R.string.errorNumbScale)
-            Error.DESCRIPTION_NULL -> errorDescription.text =
-                resources.getString(R.string.errorDescriptionNull)
+            Error.DESCRIPTION_NULL ->
+                errorDescription.text = resources.getString(R.string.errorDescriptionNull)
         }
     }
 
-    //метод для инициализации вьюшек
+    // метод для инициализации вьюшек
     private fun initializeView() {
         noteNumber = findViewById(R.id.editTextNumb)
         noteDescription = findViewById(R.id.editTextDescriptor)
@@ -100,10 +97,9 @@ class AddEventActivity : AppCompatActivity() {
         dateAndTime.setText(formatForDate.format(date))
         textListener(noteNumber, Fragments.NUMBER)
         textListener(noteDescription, Fragments.DESCRIPTION)
-
     }
 
-    //функция для отправки данных на первый activity
+    // функция для отправки данных на первый activity
     private fun sendDataToMainActivity() {
 
         val intent = Intent(this, MainActivity::class.java)
@@ -160,6 +156,7 @@ class AddEventActivity : AppCompatActivity() {
                             try {
                                 s.toString().toInt()
                             } catch (e: RuntimeException) {
+                                Log.d("RuntimeException",e.message.toString())
                                 0
                             }
                     }
@@ -174,7 +171,7 @@ class AddEventActivity : AppCompatActivity() {
         }
         text.addTextChangedListener(TextWatcherImpl(textWatcher))
 
-        //solution without delegate
+        // solution without delegate
         /*text.addTextChangedListener( object : TextWatcher {
 
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

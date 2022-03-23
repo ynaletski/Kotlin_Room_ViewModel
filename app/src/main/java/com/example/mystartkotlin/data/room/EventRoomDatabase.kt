@@ -48,7 +48,6 @@ abstract class EventRoomDatabase : RoomDatabase() {
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
                         populateDatabase(database.eventDao())
-
                     }
                 }
             }

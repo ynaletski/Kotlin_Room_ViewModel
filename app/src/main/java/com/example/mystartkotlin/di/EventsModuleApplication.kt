@@ -15,5 +15,4 @@ class EventsModuleApplication : Application() {
             modules(eventModule)
         }
     }
-
 }

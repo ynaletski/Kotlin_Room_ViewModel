@@ -25,5 +25,4 @@ class EventRepository(private val eventDao: EventDao) : IEventRepository {
     }
 
     override val countEvents: Flow<Int> = eventDao.getCountEvents()
-
 }

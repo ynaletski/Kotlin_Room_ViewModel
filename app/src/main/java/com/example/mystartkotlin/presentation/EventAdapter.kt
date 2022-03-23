@@ -10,17 +10,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.mystartkotlin.R
-import com.example.mystartkotlin.presentation.EventAdapter.EventViewHolder
 import com.example.mystartkotlin.data.room.Event
-import java.util.*
+import com.example.mystartkotlin.presentation.EventAdapter.EventViewHolder
 
 internal class EventAdapter(
-    context: Context?,  /*ArrayList<Event> events,*/
-    RemoveClickListener: RemoveClickListener
+    context: Context?, /*ArrayList<Event> events,*/
+    removeClickListener: RemoveClickListener,
 ) : RecyclerView.Adapter<EventViewHolder>() {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private val events = ArrayList<Event>()
-    private val removeEventClickListener: RemoveClickListener = RemoveClickListener
+    private val removeEventClickListener: RemoveClickListener = removeClickListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val view = inflater.inflate(R.layout.event_item, parent, false)
         return EventViewHolder(view)

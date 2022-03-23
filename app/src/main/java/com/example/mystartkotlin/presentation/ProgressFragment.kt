@@ -15,7 +15,7 @@ class ProgressFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
 
         val view: View = inflater.inflate(R.layout.progress_fragment, container, false)
@@ -32,7 +32,8 @@ class ProgressFragment : Fragment() {
                         break
                     }
                 }*/
-        })
+        }
+        )
         threadProgress.start()
 
         return view

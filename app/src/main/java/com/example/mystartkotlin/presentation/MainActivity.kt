@@ -20,9 +20,9 @@ import androidx.biometric.auth.Class3BiometricAuthPrompt
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mystartkotlin.*
 import com.example.feature.biometric.BiometricCipher
 import com.example.feature.biometric.authenticate
+import com.example.mystartkotlin.R
 import com.example.mystartkotlin.data.room.Event
 import com.example.mystartkotlin.presentation.viewmodel.EventViewModel
 import com.example.mystartkotlin.presentation.viewmodel.HelloViewModel
@@ -33,7 +33,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    //private val requestSecondActivity = 1
+    // private val requestSecondActivity = 1
 
     private val helloViewModel: HelloViewModel by viewModel()
 
@@ -55,12 +55,14 @@ class MainActivity : AppCompatActivity() {
 
         initialize()
 
-        eventAdapter = EventAdapter(this, object : RemoveClickListener {
-
-            override fun removeEvent(positionEvent: Int) {
-                eventViewModel.deleteByEventId(positionEvent)
+        eventAdapter = EventAdapter(
+            this,
+            object : RemoveClickListener {
+                override fun removeEvent(positionEvent: Int) {
+                    eventViewModel.deleteByEventId(positionEvent)
+                }
             }
-        })
+        )
 
         recyclerView.adapter = eventAdapter
 
@@ -73,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        //LiveData
+        // LiveData
         /*eventViewModel.allEvents.observe(this) { events ->
             events.let { eventAdapter.insertData(it) }
         }*/
@@ -94,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        //LiveData
+        // LiveData
         /*eventViewModel.countEvents.observe(this) { count ->
             if (count == 0) {
                 eventViewModel.insert(
@@ -111,7 +113,6 @@ class MainActivity : AppCompatActivity() {
         deleteAll.setOnClickListener {
             deleteConfirmBiometricAuth()
         }
-
     }
 
     override fun onDestroy() {
@@ -126,11 +127,11 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(intent, requestSecondActivity)*/
     }
 
-    //метод принимающий результат со второй активити()
+    // метод принимающий результат со второй активити()
     private val startResultFromSecondActivity =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
-                //eventAdapter.insertData(Cash.getEvents())
+                // eventAdapter.insertData(Cash.getEvents())
                 Log.d("StartActivityForResult", "Activity.RESULT_OK")
             } else {
                 Log.d("StartActivityForResult", "Activity.RESULT_NOT_OK")
@@ -146,7 +147,7 @@ class MainActivity : AppCompatActivity() {
     private fun initialize() {
         recyclerView = findViewById(R.id.eventList)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        //если знаем за ранее размер списка то true
+        // если знаем за ранее размер списка то true
         recyclerView.setHasFixedSize(false)
         deleteAll = findViewById(R.id.deleteAll)
     }
@@ -176,8 +177,6 @@ class MainActivity : AppCompatActivity() {
         alertDialog.setCancelable(false)
         alertDialog.show()
     }
-
-
     private fun deleteConfirmBiometricAuth() {
         val success = BiometricManager.from(this)
             .canAuthenticate(BIOMETRIC_STRONG) == BIOMETRIC_SUCCESS
@@ -201,13 +200,10 @@ class MainActivity : AppCompatActivity() {
                         authPrompt.authenticate(AuthPromptHost(this@MainActivity), encryptor)
 
                     val encryptedEntity = authResult.cryptoObject?.cipher?.let { cipher ->
-                        biometricCipher.encrypt(
-                            "Secret data",
-                            cipher
-                        )
+                        biometricCipher.encrypt("Secret data", cipher)
                     }
                     deleteConfirmAlertDialog()
-                    //Log.d(MainActivity::class.simpleName, String(encryptedEntity!!.ciphertext))
+                    Log.d(MainActivity::class.simpleName, encryptedEntity.toString())
                 } catch (e: AuthPromptErrorException) {
                     Log.e("AuthPromptError", e.message ?: "no message")
                 } catch (e: AuthPromptFailureException) {
@@ -216,5 +212,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 }

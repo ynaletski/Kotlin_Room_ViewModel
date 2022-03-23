@@ -1,8 +1,8 @@
 package com.example.mystartkotlin.di
 
 import android.app.Application
-import com.example.mystartkotlin.data.room.EventRoomDatabase
 import com.example.mystartkotlin.data.repository.EventRepository
+import com.example.mystartkotlin.data.room.EventRoomDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
@@ -24,6 +24,4 @@ class EventsApplication : Application() {
     private val applicationScope = CoroutineScope(SupervisorJob())
     private val database by lazy { EventRoomDatabase.getDatabase(this, applicationScope) }
     val repository by lazy { EventRepository(database.eventDao()) }
-
-
 }
