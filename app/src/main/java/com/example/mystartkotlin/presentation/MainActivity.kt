@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("MainActivity onDestroy", helloViewModel.sayBye())
+        Log.d("MainActivity onDestroy", helloViewModel.sayBye)
     }
 
     // Метод обработки нажатия на кнопку

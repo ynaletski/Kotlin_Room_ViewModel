@@ -1,6 +1,10 @@
 package com.example.mystartkotlin.data.room
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy.IGNORE
+import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -9,7 +13,7 @@ interface EventDao {
     @Query("SELECT * FROM events")
     fun getAllEventsUsingFlow(): Flow<List<Event>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = IGNORE)
     suspend fun insert(event: Event)
 
     @Insert

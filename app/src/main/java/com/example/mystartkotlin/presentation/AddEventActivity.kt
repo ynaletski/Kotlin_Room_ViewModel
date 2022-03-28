@@ -22,7 +22,7 @@ import com.example.mystartkotlin.presentation.viewmodel.EventViewModelFactory
 import com.example.mystartkotlin.presentation.viewmodel.HelloViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 class AddEventActivity : AppCompatActivity() {
     private lateinit var dateAndTime: EditText
@@ -64,20 +64,20 @@ class AddEventActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("AddActivity onDestroy", helloViewModel.sayBye())
+        Log.d("AddActivity onDestroy", helloViewModel.sayBye)
     }
 
     // Метод обработки нажатия на кнопку Отменить
     @Suppress("unused")
-    fun goToMainActivityWithoutEvent(view: View?) {
+    fun goToMainActivityWithoutEvent(@Suppress("UNUSED_PARAMETER") view: View?) {
         stopProgressFragments()
         finish()
     }
 
     // Метод обработки нажатия на кнопку Подтвердить
     @SuppressLint("SetTextI18n")
-    @Suppress("unused")
-    fun goToMainActivityWithEvent(view: View?) {
+    @Suppress("UNUSED_PARAMETER")
+    fun goToMainActivityWithEvent(@Suppress("UNUSED_PARAMETER") view: View?) {
         when (validationOfData()) {
             Error.NO_ERROR -> sendDataToMainActivity()
             Error.NUMB_NULL -> errorNumber.text = resources.getString(R.string.errorNumbNull)
@@ -158,7 +158,7 @@ class AddEventActivity : AppCompatActivity() {
                             try {
                                 s.toString().toInt()
                             } catch (e: RuntimeException) {
-                                Log.d("RuntimeException", e.message.toString())
+                                // Log.d("RuntimeException", e.message.toString())
                                 0
                             }
                     }
