@@ -121,6 +121,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Метод обработки нажатия на кнопку
+    @Suppress("unused")
     fun goToAddEventActivity(view: View?) {
         startResultFromSecondActivity.launch(Intent(this, AddEventActivity::class.java))
         /*val intent = Intent(this, AddEventActivity::class.java)

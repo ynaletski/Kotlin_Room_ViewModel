@@ -19,9 +19,11 @@ class ProgressFragment : Fragment() {
     ): View {
 
         val view: View = inflater.inflate(R.layout.progress_fragment, container, false)
+        @Suppress("unused")
         val indicatorBar: ProgressBar = view.findViewById(R.id.indicator)
 
-        threadProgress = Thread(kotlinx.coroutines.Runnable {
+        threadProgress = Thread(
+            kotlinx.coroutines.Runnable {
             /*    for (i in 1..100) {
                     try {
                         Log.e("nm", " $i")
@@ -32,7 +34,7 @@ class ProgressFragment : Fragment() {
                         break
                     }
                 }*/
-        }
+            }
         )
         threadProgress.start()
 

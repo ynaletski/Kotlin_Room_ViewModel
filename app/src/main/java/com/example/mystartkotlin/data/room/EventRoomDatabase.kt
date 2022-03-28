@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Event::class], version = 1)
+@Database(entities = [Event::class], version = 1, exportSchema = false)
 abstract class EventRoomDatabase : RoomDatabase() {
 
     abstract fun eventDao(): EventDao

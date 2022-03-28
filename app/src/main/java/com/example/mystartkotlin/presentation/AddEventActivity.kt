@@ -68,6 +68,7 @@ class AddEventActivity : AppCompatActivity() {
     }
 
     // Метод обработки нажатия на кнопку Отменить
+    @Suppress("unused")
     fun goToMainActivityWithoutEvent(view: View?) {
         stopProgressFragments()
         finish()
@@ -75,6 +76,7 @@ class AddEventActivity : AppCompatActivity() {
 
     // Метод обработки нажатия на кнопку Подтвердить
     @SuppressLint("SetTextI18n")
+    @Suppress("unused")
     fun goToMainActivityWithEvent(view: View?) {
         when (validationOfData()) {
             Error.NO_ERROR -> sendDataToMainActivity()
@@ -156,7 +158,7 @@ class AddEventActivity : AppCompatActivity() {
                             try {
                                 s.toString().toInt()
                             } catch (e: RuntimeException) {
-                                Log.d("RuntimeException",e.message.toString())
+                                Log.d("RuntimeException", e.message.toString())
                                 0
                             }
                     }
