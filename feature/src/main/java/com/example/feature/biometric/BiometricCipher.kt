@@ -1,11 +1,10 @@
 package com.example.feature.biometric
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.security.keystore.KeyGenParameterSpec
-import android.security.keystore.KeyProperties.*
+import android.security.keystore.KeyProperties
 import androidx.biometric.BiometricPrompt
 import java.security.KeyStore
 import javax.crypto.Cipher
@@ -25,8 +24,6 @@ class BiometricCipher(
 
         return BiometricPrompt.CryptoObject(encryptor)
     }
-
-    @SuppressLint("NewApi")
     fun getDecryptor(iv: ByteArray): BiometricPrompt.CryptoObject {
         val decryptor = Cipher.getInstance(TRANSFORMATION).apply {
             init(Cipher.DECRYPT_MODE, getOrCreateKey(), GCMParameterSpec(AUTH_TAG_SIZE, iv))
@@ -52,7 +49,6 @@ class BiometricCipher(
         return String(plaintext, Charsets.UTF_8)
     }
 
-    @SuppressLint("NewApi")
     private fun getOrCreateKey(): SecretKey {
         val keystore = KeyStore.getInstance(KEYSTORE_PROVIDER).apply {
             load(null)
@@ -62,9 +58,12 @@ class BiometricCipher(
             return key as SecretKey
         }
 
-        val keySpec = KeyGenParameterSpec.Builder(keyAlias, PURPOSE_ENCRYPT or PURPOSE_DECRYPT)
-            .setBlockModes(BLOCK_MODE_GCM)
-            .setEncryptionPaddings(ENCRYPTION_PADDING_NONE)
+        val keySpec = KeyGenParameterSpec.Builder(
+            keyAlias,
+            KeyProperties.PURPOSE_DECRYPT or KeyProperties.PURPOSE_DECRYPT
+        )
+            .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
+            .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
             .setKeySize(KEY_SIZE)
             .setUserAuthenticationRequired(true)
             .apply {
@@ -79,7 +78,7 @@ class BiometricCipher(
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    setUserAuthenticationParameters(0, AUTH_BIOMETRIC_STRONG)
+                    setUserAuthenticationParameters(0, KeyProperties.AUTH_BIOMETRIC_STRONG)
                 }
             }.build()
 
@@ -91,13 +90,15 @@ class BiometricCipher(
     }
 
     companion object {
-        @SuppressLint("InlinedApi")
-        private const val TRANSFORMATION = "$KEY_ALGORITHM_AES/" +
-            "$BLOCK_MODE_GCM/" +
-            ENCRYPTION_PADDING_NONE
-
+        private const val BLOCK_MODE_GCM = "GCM"
+        private const val ENCRYPTION_PADDING_NONE = "NoPadding"
+        private const val KEY_ALGORITHM_AES = "AES"
         private const val KEYSTORE_PROVIDER = "AndroidKeyStore"
         private const val AUTH_TAG_SIZE = 128
         private const val KEY_SIZE = 256
+
+        private const val TRANSFORMATION = "$KEY_ALGORITHM_AES/" +
+            "$BLOCK_MODE_GCM/" +
+            ENCRYPTION_PADDING_NONE
     }
 }
