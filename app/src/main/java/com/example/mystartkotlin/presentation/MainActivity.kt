@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
     // Метод обработки нажатия на кнопку
     @Suppress("unused")
-    fun goToAddEventActivity(view: View?) {
+    fun goToAddEventActivity(@Suppress("UNUSED_PARAMETER") view: View?) {
         startResultFromSecondActivity.launch(Intent(this, AddEventActivity::class.java))
         /*val intent = Intent(this, AddEventActivity::class.java)
         startActivityForResult(intent, requestSecondActivity)*/
@@ -130,7 +130,8 @@ class MainActivity : AppCompatActivity() {
 
     // метод принимающий результат со второй активити()
     private val startResultFromSecondActivity =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 // eventAdapter.insertData(Cash.getEvents())
                 Log.d("StartActivityForResult", "Activity.RESULT_OK")

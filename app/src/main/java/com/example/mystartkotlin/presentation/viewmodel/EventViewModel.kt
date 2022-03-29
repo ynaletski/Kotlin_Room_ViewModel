@@ -11,11 +11,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class EventViewModel(private val repository: IEventRepository) : ViewModel() {
+const val STOP_TIMEOUT = 5000L
 
+class EventViewModel(private val repository: IEventRepository) : ViewModel() {
     val allEvents: StateFlow<List<Event>> = repository.allEvents.stateIn(
         scope = viewModelScope,
-        started = WhileSubscribed(5000),
+        started = WhileSubscribed(STOP_TIMEOUT),
         initialValue = Cash.getEvents()
     )
     // livedata
@@ -35,7 +36,7 @@ class EventViewModel(private val repository: IEventRepository) : ViewModel() {
 
     val countEvents: StateFlow<Int> = repository.countEvents.stateIn(
         scope = viewModelScope,
-        started = WhileSubscribed(5000),
+        started = WhileSubscribed(STOP_TIMEOUT),
         initialValue = 1
     )
     // livedata

@@ -24,6 +24,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 
+const val MAX_CHARS = 1000
+
 class AddEventActivity : AppCompatActivity() {
     private lateinit var dateAndTime: EditText
     private lateinit var noteNumber: EditText
@@ -48,8 +50,11 @@ class AddEventActivity : AppCompatActivity() {
     }
 
     private val textWatcher = object : TextWatcher {
+        @Suppress("EmptyFunctionBlock")
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        @Suppress("EmptyFunctionBlock")
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        @Suppress("EmptyFunctionBlock")
         override fun afterTextChanged(s: Editable?) {}
     }
 
@@ -95,7 +100,8 @@ class AddEventActivity : AppCompatActivity() {
         errorNumber = findViewById(R.id.errorNumb)
         errorDescription = findViewById(R.id.errorDesc)
         val date = Date()
-        @SuppressLint("SimpleDateFormat") val formatForDate = SimpleDateFormat("hh:mm dd.MM.yyyy")
+        @SuppressLint("SimpleDateFormat") val formatForDate =
+            SimpleDateFormat("hh:mm dd.MM.yyyy")
         dateAndTime.setText(formatForDate.format(date))
         textListener(noteNumber, Fragments.NUMBER)
         textListener(noteDescription, Fragments.DESCRIPTION)
@@ -123,7 +129,7 @@ class AddEventActivity : AppCompatActivity() {
     private fun validationOfData(): Error {
         return if (noteNumber.text.isNotEmpty()) {
             if (noteNumber.text.toString().toInt() < 1 ||
-                noteNumber.text.toString().toInt() > 1000
+                noteNumber.text.toString().toInt() > MAX_CHARS
             ) {
                 Error.NUMB_SCALE
             } else {
@@ -157,8 +163,8 @@ class AddEventActivity : AppCompatActivity() {
                         fragmentNumber.view?.findViewById<ProgressBar>(R.id.indicator)?.progress =
                             try {
                                 s.toString().toInt()
-                            } catch (e: RuntimeException) {
-                                // Log.d("RuntimeException", e.message.toString())
+                            } catch (e: NumberFormatException) {
+                                Log.d("RuntimeException", e.message.toString())
                                 0
                             }
                     }
