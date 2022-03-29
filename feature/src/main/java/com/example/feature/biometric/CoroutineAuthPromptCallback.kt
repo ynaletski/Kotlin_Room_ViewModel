@@ -11,25 +11,25 @@ import kotlin.coroutines.resumeWithException
  * Implementation of [AuthPromptCallback] used to transform callback results for coroutine APIs.
  */
 internal class CoroutineAuthPromptCallback(
-    private val continuation: CancellableContinuation<BiometricPrompt.AuthenticationResult>
+    private val continuation: CancellableContinuation<BiometricPrompt.AuthenticationResult>,
 ) : AuthPromptCallback() {
     override fun onAuthenticationError(
         activity: FragmentActivity?,
         errorCode: Int,
-        errString: CharSequence
+        errString: CharSequence,
     ) {
         continuation.resumeWithException(AuthPromptErrorException(errorCode, errString))
     }
 
     override fun onAuthenticationSucceeded(
         activity: FragmentActivity?,
-        result: BiometricPrompt.AuthenticationResult
+        result: BiometricPrompt.AuthenticationResult,
     ) {
         continuation.resumeWith(Result.success(result))
     }
 
     override fun onAuthenticationFailed(activity: FragmentActivity?) {
-        //continuation.resumeWithException(AuthPromptFailureException())
-        //my stub
+        // continuation.resumeWithException(AuthPromptFailureException())
+        // my stub
     }
 }

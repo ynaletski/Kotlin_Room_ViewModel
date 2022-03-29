@@ -1,5 +1,6 @@
 package com.example.feature.biometric
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
@@ -12,9 +13,8 @@ import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
 
-
 class BiometricCipher(
-    private val applicationContext: Context
+    private val applicationContext: Context,
 ) {
     private val keyAlias by lazy { "${applicationContext.packageName}.biometricKey" }
 
@@ -26,6 +26,7 @@ class BiometricCipher(
         return BiometricPrompt.CryptoObject(encryptor)
     }
 
+    @SuppressLint("NewApi")
     fun getDecryptor(iv: ByteArray): BiometricPrompt.CryptoObject {
         val decryptor = Cipher.getInstance(TRANSFORMATION).apply {
             init(Cipher.DECRYPT_MODE, getOrCreateKey(), GCMParameterSpec(AUTH_TAG_SIZE, iv))
@@ -51,6 +52,7 @@ class BiometricCipher(
         return String(plaintext, Charsets.UTF_8)
     }
 
+    @SuppressLint("NewApi")
     private fun getOrCreateKey(): SecretKey {
         val keystore = KeyStore.getInstance(KEYSTORE_PROVIDER).apply {
             load(null)
@@ -89,9 +91,10 @@ class BiometricCipher(
     }
 
     companion object {
+        @SuppressLint("InlinedApi")
         private const val TRANSFORMATION = "$KEY_ALGORITHM_AES/" +
-                "$BLOCK_MODE_GCM/" +
-                ENCRYPTION_PADDING_NONE
+            "$BLOCK_MODE_GCM/" +
+            ENCRYPTION_PADDING_NONE
 
         private const val KEYSTORE_PROVIDER = "AndroidKeyStore"
         private const val AUTH_TAG_SIZE = 128

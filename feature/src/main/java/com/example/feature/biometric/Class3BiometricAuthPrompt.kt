@@ -5,10 +5,9 @@ import androidx.biometric.auth.AuthPromptHost
 import androidx.biometric.auth.Class3BiometricAuthPrompt
 import kotlinx.coroutines.suspendCancellableCoroutine
 
-
 suspend fun Class3BiometricAuthPrompt.authenticate(
     host: AuthPromptHost,
-    crypto: BiometricPrompt.CryptoObject?
+    crypto: BiometricPrompt.CryptoObject?,
 ): BiometricPrompt.AuthenticationResult {
     return suspendCancellableCoroutine { continuation ->
         val authPrompt = startAuthentication(
